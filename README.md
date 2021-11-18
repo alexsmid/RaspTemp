@@ -46,7 +46,7 @@ cp justgage–1.2.2/*.js static/
 # TODO
 - [x] Systemd file
 - [ ] flask-boostrap
-- [ ] Get gage to to be showned
+- [ ] Get gage to to be show
 - [ ] Get gage working on mobile
 - [ ] Get temperature
 - [ ] Python install script
