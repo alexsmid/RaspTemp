@@ -1,10 +1,12 @@
 # RaspTemp
 This is to set up an newly installed Raspberry Pi OS Lite with a small webpage to display the temperature from a DS18B20.
 
+## Instruction
+
 - Add file named "ssh" on the boot partition, to enable SSH
 
 ### Set up new user, remove default
--SSH to it, user "pi" password "raspberry".
+- SSH to it, user "pi" password "raspberry".
 ```
 sudo adduser tempmeasureuser
 ```
@@ -18,7 +20,7 @@ groups | sed 's/pi //g' | sed 's/ /,/g' | xargs -I{} sudo usermod -a -G {} tempm
 ```
 sudo deluser --remove-home pi
 ```
-## Install webstuff, with Flask
+### Install webstuff, with Flask
 ```
 sudo apt-get update
 
@@ -26,12 +28,15 @@ sudo apt-get install python3-pip
 sudo pip install flask
 sudo nano main.py 
 ```
-Add the stuff
+Add Python
 ```
 sudo chmod +x main.py
 mkdir templates
 cd templates
 nano main.html
+```
+Add html code
+```
 wget https://toorshia.github.io/justgage/download/justgage-1.2.2.zip
 unzip justgage-1.2.2.zip
 mkdir static
