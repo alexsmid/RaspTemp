@@ -6,8 +6,10 @@ app = Flask(__name__)
 def main():
    templateData = {
       'temperature' : 23,
+      'updated' : 2020-01-10
    }
    return render_template('main.html', **templateData)
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=80, debug=True)
+    from waitress import serve
+    serve(host='0.0.0.0', port=80, debug=True)

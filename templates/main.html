@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Dynamic Resize</title>
+    <title>Temperatur Lusernvägen</title>
     <meta http–equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         body {
@@ -32,7 +32,6 @@
             bottom: 0;
             left: 0;
             margin: 30px;
-            border: 1px solid #cccccc;
         }
 
         .gauge {
@@ -48,7 +47,7 @@
 
 <body>
     <div class="wrapper clear">
-        <div id="g1" class="gauge"></div>
+        <div id="g1" class="Gauge"></div>
     </div>
     <script src="{{ url_for('static', filename='raphael-2.1.4.min.js') }}"></script>
     <script src="{{ url_for('static', filename='justgage.js') }}"></script>
@@ -58,12 +57,13 @@
             var g1 = new JustGage({
                 id: "g1",
                 value: {{ temperature }},
-            min: 10,
-            max: 40,
-            title: "Temperature",
+                min: 10,
+                max: 40,
+                height: 300,
+                width: 300,
+                title: "Temperatur"
+            });
         });
- 
-    });
     </script>
 </body>
 
