@@ -42,3 +42,11 @@ unzip justgage-1.2.2.zip
 mkdir static
 cp justgage–1.2.2/*.js static/
 ```
+
+# TODO
+- [x] Systemd file
+- [ ] flask-boostrap
+- [ ] Get gage to to be showned
+- [ ] Get gage working on mobile
+- [ ] Get temperature
+- [ ] Python install script
