@@ -25,7 +25,7 @@ sudo deluser --remove-home pi
 sudo apt-get update
 
 sudo apt-get install python3-pip
-sudo pip install flask waitress
+sudo pip install flask waitress flask-bootstrap 
 sudo nano main.py 
 ```
 Add Python
@@ -49,4 +49,6 @@ cp justgage–1.2.2/*.js static/
 - [ ] Get gage to to be show
 - [ ] Get gage working on mobile
 - [ ] Get temperature
+- [ ] Remote internet access
+- [ ] DynDNS
 - [ ] Python install script
