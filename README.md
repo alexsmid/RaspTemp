@@ -25,7 +25,7 @@ sudo deluser --remove-home pi
 sudo apt-get update
 
 sudo apt-get install python3-pip
-sudo pip install flask waitress flask-bootstrap 
+sudo pip install flask waitress bootstrap-flask
 sudo nano main.py 
 ```
 Add Python

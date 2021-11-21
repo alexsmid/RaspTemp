@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <title>Temperatur Lusernvägen</title>
     <meta http–equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         body {
@@ -43,12 +42,27 @@
             width: 100%;
         }
     </style>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    {% endblock %}
+
+    <title>Temperatur Lusernvägen</title>
+    {% endblock %}
 </head>
 
 <body>
     <div class="wrapper clear">
         <div id="g1" class="Gauge"></div>
     </div>
+    {% block content %}{% endblock %}
+
+    {% block scripts %}
     <script src="{{ url_for('static', filename='raphael-2.1.4.min.js') }}"></script>
     <script src="{{ url_for('static', filename='justgage.js') }}"></script>
     <script>
@@ -57,14 +71,43 @@
             var g1 = new JustGage({
                 id: "g1",
                 value: {{ temperature }},
-                min: 10,
-                max: 40,
-                height: 300,
-                width: 300,
-                title: "Temperatur"
+            min: 10,
+            max: 40,
+            height: 300,
+            width: 300,
+            title: "Temperatur"
             });
         });
     </script>
+    {{ bootstrap.load_js() }}
+    {% endblock %}
+</body>
+
+</html>
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    {% endblock %}
+
+    <title>Your page title</title>
+    {% endblock %}
+</head>
+
+<body>
+    <!-- Your page content -->
+
 </body>
 
 </html>
