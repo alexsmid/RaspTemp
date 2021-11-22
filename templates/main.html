@@ -3,10 +3,10 @@
 
 <head>
     <style>
-        svg {
+        /* svg {
             height: 300px;
-        }
-        
+        } */
+
         .wrapper {
             width: 300px;
             height: 300px;
@@ -39,19 +39,13 @@
         <font color="gray">Last updated:<br>
             {{updated}}</font>
     </div>
-    <a href="#" id="g1_refresh" class="button grey">Random update</a>
     {% block content %}{% endblock %}
 
     {% block scripts %}
-    <script src="{{ url_for('static', filename='raphael-2.1.4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='raphael-min.js') }}"></script>
     <script src="{{ url_for('static', filename='justgage.js') }}"></script>
     <script>
-         /** Random integer  */
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
         document.addEventListener("DOMContentLoaded", function (event) {
-            var g1
             var g1 = new JustGage({
                 id: "g1",
                 value: {{ temperature }},
@@ -62,6 +56,7 @@
                 decimals: 1,
                 symbol: '°C',
                 title: "Temperatur",
+                gaugeWidthScale: 0.8,
                 customSectors: {
                     ranges: [
                         {
@@ -89,10 +84,6 @@
                 }
             });
         });
-        document.getElementById('g1_refresh').addEventListener('click', function () {
-        g1.refresh(getRandomInt(0, 40));
-      });
-
     </script>
     {{ bootstrap.load_js() }}
     {% endblock %}

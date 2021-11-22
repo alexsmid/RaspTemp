@@ -37,10 +37,13 @@ nano main.html
 ```
 Add html code
 ```
-wget https://toorshia.github.io/justgage/download/justgage-1.2.2.zip
-unzip justgage-1.2.2.zip
+~~wget https://toorshia.github.io/justgage/download/justgage-1.2.2.zip~~
+wget https://github.com/toorshia/justgage/releases/latest/download/justgage.js
+wget https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.0/raphael-min.js
+~~unzip justgage-1.2.2.zip~~
 mkdir static
-cp justgage–1.2.2/*.js static/
+~~cp justgage–1.2.2/*.js static/~~
+mv *.js static/
 ```
 
 # TODO

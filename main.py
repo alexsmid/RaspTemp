@@ -9,7 +9,7 @@ bootstrap = Bootstrap(app)
 @app.route("/")
 def main():
     templateData = {
-        'temperature' : 10,
+        'temperature' : 22,
         'updated' : '2020-01-10'
     }
     return render_template('main.html', **templateData)
