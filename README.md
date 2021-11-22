@@ -45,10 +45,11 @@ cp justgage–1.2.2/*.js static/
 
 # TODO
 - [x] Systemd file
-- [ ] flask-boostrap
-- [ ] Get gage to to be show
-- [ ] Get gage working on mobile
+- [x] flask-boostrap
+- [x] Get gage to to be show
+- [x] Get gage working on mobile
 - [ ] Get temperature
+- [ ] Get last updated date
 - [ ] Remote internet access
 - [ ] DynDNS
 - [ ] Python install script
