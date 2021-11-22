@@ -61,8 +61,10 @@
 <body>
     <div class="wrapper clear">
         <div id="g1" class="Gauge"></div>
+        <font color="gray">Last updated:<br>
+            {{updated}}</font>
     </div>
-    {{updated}}
+
     {% block content %}{% endblock %}
 
     {% block scripts %}
@@ -74,36 +76,36 @@
             var g1 = new JustGage({
                 id: "g1",
                 value: {{ temperature }},
-                min: 0,
-                max: 40,
-                height: 300,
-                width: 300,
-                decimals: 1,
-                symbol: '°C',
-                title: "Temperatur",
-                customSectors: {
-                    ranges: [{
-                        color: "#ff3b30",
-                        lo: 0,
-                        hi: 10
-                    }, {
-                        color: "#f39f00",
-                        lo: 11,
-                        hi: 15
-                    }, {
-                        color: "#43bf58",
-                        lo: 16,
-                        hi: 25
-                    }, {
-                        color: "#f39f00",
-                        lo: 26,
-                        hi: 30
-                    }, {
-                        color: "#ff3b30",
-                        lo: 31,
-                        hi: 40
-                    }]
-                }
+            min: 0,
+            max: 40,
+            height: 300,
+            width: 300,
+            decimals: 1,
+            symbol: '°C',
+            title: "Temperatur",
+            customSectors: {
+            ranges: [{
+                color: "#ff3b30",
+                lo: 0,
+                hi: 10
+            }, {
+                color: "#f39f00",
+                lo: 11,
+                hi: 15
+            }, {
+                color: "#43bf58",
+                lo: 16,
+                hi: 25
+            }, {
+                color: "#f39f00",
+                lo: 26,
+                hi: 30
+            }, {
+                color: "#ff3b30",
+                lo: 31,
+                hi: 40
+            }]
+        }
             });
         });
     </script>
