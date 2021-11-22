@@ -1,8 +1,9 @@
 <!doctype html>
 <html>
+
 <head>
     <style>
-       /*  body {
+        /*  body {
             text-align: center;
             padding: 0px;
             margin: 0px;
@@ -21,21 +22,19 @@
         .clear {
             *zoom: 1;
         }
-
+*/
         .wrapper {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            margin: 30px;
+            width: 450px;
+            margin: 50px auto 0 auto;
+            text-align: center;
         }
 
         .gauge {
-            display: block;
-            float: left;
+            height: 300px;
+            width: 300 px;
         }
 
+        /*
         #g1 {
             width: 100%;
         } */
@@ -53,10 +52,11 @@
     <title>Temperatur Lusernvägen</title>
     {% endblock %}
 </head>
+
 <body>
-    <!-- <div class="wrapper clear"> -->
+    <div class="wrapper clear">
         <div id="g1" class="Gauge"></div>
-    <!-- </div> -->
+    </div>
     {% block content %}{% endblock %}
 
     {% block scripts %}
@@ -68,8 +68,8 @@
             var g1 = new JustGage({
                 id: "g1",
                 value: {{ temperature }},
-            min: 10,
-            max: 40,
+            min: 0,
+            max: 50,
             height: 300,
             width: 300,
             title: "Temperatur"
@@ -79,4 +79,5 @@
     {{ bootstrap.load_js() }}
     {% endblock %}
 </body>
+
 </html>
