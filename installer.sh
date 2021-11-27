@@ -33,7 +33,7 @@ while true; do
     read -p "Do you wish to setup the FreeDNS?: [y/n]" yn
     case $yn in
         [Yy]* ) 
-            INSTALLFREEDNS=1
+            INSTALLFREEDNS=true
             break
         ;;
         [Nn]* )
@@ -45,7 +45,8 @@ while true; do
     esac
 done
 
-if [$INSTALLFREEDNS]; then
+if $INSTALLFREEDNS
+then
     while true; do
         read -p "FreeDNS domain name (enter to skip): [y/n]" answer
         case $answer in
