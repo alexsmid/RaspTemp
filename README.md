@@ -1,58 +1,48 @@
 # RaspTemp
 This is to set up an newly installed Raspberry Pi OS Lite with a small webpage to display the temperature from a DS18B20.
+It uses waiterss, flask, bootstrap-flask and JustGage
 
-## Instruction
+JustGage download location:
+
+JustGage 1.5.0: https://github.com/toorshia/justgage/releases/latest/download/justgage.js
+
+Raphael 2.2.0: https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.0/raphael-min.js
+
+## Instructions
 
 - Add file named "ssh" on the boot partition, to enable SSH
 
-### Set up new user, remove default
+### Set up new user, RaspTemp
 - SSH to it, user "pi" password "raspberry".
+- Set locale, timezone etc:
 ```
-sudo adduser tempmeasureuser
+sudo raspi-config
 ```
-- Set fullname to "TempMeasureUser"
+- Add new user
+```
+sudo adduser rasptemp
+```
+- Set fullname to "RaspTemp"
 - Set a password
+- Copy the groups from "pi":
 ```
-groups | sed 's/pi //g' | sed 's/ /,/g' | xargs -I{} sudo usermod -a -G {} tempmeasureuser
+groups | sed 's/pi //g' | sed 's/ /,/g' | xargs -I{} sudo usermod -a -G {} rasptemp
 ```
 - Exit
-- Connect again with tempmeasureuser
-```
-sudo deluser --remove-home pi
-```
-### Install webstuff, with Flask
-```
-sudo apt-get update
+- Connect again with RaspTemp
+### Install the RaspTemp
+- Clone the git repository
+- Run the install.sh script
 
-sudo apt-get install python3-pip
-sudo pip install flask waitress bootstrap-flask
-sudo nano main.py 
-```
-Add Python
-```
-sudo chmod +x main.py
-mkdir templates
-cd templates
-nano main.html
-```
-Add html code
-```
-~~wget https://toorshia.github.io/justgage/download/justgage-1.2.2.zip~~
-wget https://github.com/toorshia/justgage/releases/latest/download/justgage.js
-wget https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.0/raphael-min.js
-~~unzip justgage-1.2.2.zip~~
-mkdir static
-~~cp justgage–1.2.2/*.js static/~~
-mv *.js static/
-```
+This will install the needed packages, set up the service, setup FreeDNS script and crontab for FreeDNS
 
 # TODO
 - [x] Systemd file
 - [x] flask-boostrap
 - [x] Get gage to to be show
 - [x] Get gage working on mobile
+- [ ] Remote internet access with private keys
+- [x] DynDNS
 - [ ] Get temperature
 - [ ] Get last updated date
-- [ ] Remote internet access
-- [ ] DynDNS
-- [ ] Python install script
+- [x] Python install script
