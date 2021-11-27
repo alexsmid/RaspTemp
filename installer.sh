@@ -1,5 +1,7 @@
 #!/bin/bash
 
+USERHOME=$HOME
+
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit
@@ -14,10 +16,10 @@ echo "Installing needed pip packages: $PIP"
 sudo pip install $PIP
 
 while true; do
-    read -p "Do you wish to setup the RaspTemp service?: [y/n]" yn
+    read -p "Do you wish to setup the RaspTemp service? [y/n]:" yn
     case $yn in
         [Yy]* ) 
-            sudo ln -s "$HOME/RaspTemp/RaspTemp.service" RaspTemp.service
+            sudo ln -s "$USERHOME/RaspTemp/RaspTemp.service" RaspTemp.service
             break
         ;;
         [Nn]* )
@@ -30,7 +32,7 @@ while true; do
 done
 
 while true; do
-    read -p "Do you wish to setup the FreeDNS?: [y/n]" yn
+    read -p "Do you wish to setup the FreeDNS? [y/n]:" yn
     case $yn in
         [Yy]* ) 
             INSTALLFREEDNS=true
@@ -48,40 +50,40 @@ done
 if $INSTALLFREEDNS
 then
     while true; do
-        read -p "FreeDNS domain name (enter to skip): [y/n]" answer
+        read -p "FreeDNS domain name (enter to skip)? [y/n]:" answer
         case $answer in
             "" ) 
                 echo "Skipped, please change ""freedns.py"" manually"
                 break
             ;;
             * ) 
-                sed -i -e "s/%DOMAINNAMETOBEREPLACED%/$answer/g" "$HOME/RaspTemp/freedns.py"
+                sed -i -e "s/%DOMAINNAMETOBEREPLACED%/$answer/g" "$USERHOME/RaspTemp/freedns.py"
                 break
             ;;
         esac
     done
     while true; do
-        read -p "FreeDNS key (enter to skip): [y/n]" answer
+        read -p "FreeDNS key (enter to skip)? [y/n]:" answer
         case $answer in
             "" ) 
                 echo "Skipped, please change 'freedns.py' manually"
                 break
             ;;
             * ) 
-                sed -i -e "s/%KEYTOBEREPLACED%/$answer/g" "$HOME/RaspTemp/freedns.py"
+                sed -i -e "s/%KEYTOBEREPLACED%/$answer/g" "$USERHOME/RaspTemp/freedns.py"
                 break
             ;;
         esac
     done
     while true; do
-        read -p "Do you wish to setup the Crontab for FreeDNS?: [y/n]" yn
+        read -p "Do you wish to setup the Crontab for FreeDNS? [y/n]:" yn
         case $yn in
             [Yy]* ) 
                 sudo crontab -l > crontabtemp
-                echo "0 * * * * sudo python $HOME/RaspTemp/freedns.py" >> crontabtemp
+                echo "0 * * * * sudo python $USERHOME/RaspTemp/freedns.py" >> crontabtemp
                 crontab crontabtemp
                 rm crontabtemp
-                echo "Crontab configured, running ""$HOME/RaspTemp/freedns.py"" every hour"
+                echo "Crontab configured, running ""$USERHOME/RaspTemp/freedns.py"" every hour"
                 break
             ;;
             [Nn]* )
