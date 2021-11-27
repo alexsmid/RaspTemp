@@ -8,8 +8,8 @@ LOG_FILE = "/var/log/freedns"
 LOG_FORMAT = "%(asctime)s %(levelname)s %(message)s"
 logging.basicConfig(filename=LOG_FILE, format=LOG_FORMAT, level=LOG_LEVEL)
 
-FREEDNS_URL = 'http://freedns.afraid.org/dynamic/update.php?'
-DOMAIN = '%DOMAINNAMETOBEREPLACED%'
+FREEDNS_URL = "http://freedns.afraid.org/dynamic/update.php?"
+DOMAIN = "%DOMAINNAMETOBEREPLACED%"
 USER_KEY = "%KEYTOBEREPLACED%"
 
 currentip = socket.gethostbyname(DOMAIN)
