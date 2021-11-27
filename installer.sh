@@ -45,8 +45,7 @@ while true; do
     esac
 done
 
-if [$INSTALLFREEDNS -eq 1]
-then
+if [$INSTALLFREEDNS]; then
     while true; do
         read -p "FreeDNS domain name (enter to skip): [y/n]" answer
         case $answer in
