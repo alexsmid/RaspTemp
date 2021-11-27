@@ -28,9 +28,13 @@ sudo adduser rasptemp
 ```
 groups | sed 's/pi //g' | sed 's/ /,/g' | xargs -I{} sudo usermod -a -G {} rasptemp
 ```
-- Exit
+- Exit/disconnet
 - Connect again with RaspTemp
 ### Install the RaspTemp
+- Create a folder for RaspTemp:
+```
+mkdir RaspTemp
+```
 - Clone the git repository
 - Run the install.sh script
 
