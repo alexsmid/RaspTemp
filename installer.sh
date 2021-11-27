@@ -33,7 +33,7 @@ while true; do
     read -p "Do you wish to setup the FreeDNS?: [y/n]" yn
     case $yn in
         [Yy]* ) 
-            INSTALLFREEDNS = 1
+            INSTALLFREEDNS=1
             break
         ;;
         [Nn]* )
