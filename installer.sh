@@ -5,8 +5,8 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-APTGET = "python3-pip"
-PIP = "flask waitress bootstrap-flask"
+APTGET="python3-pip"
+PIP="flask waitress bootstrap-flask"
 
 Echo "Installing needed applications: "$APTGET
 sudo apt-get install $APTGET
@@ -33,7 +33,7 @@ while true; do
     read -p "Do you wish to setup the FreeDNS?: " yn
     case $yn in
         [Yy]* ) 
-            INSTALLFREEDNS = true
+            INSTALLFREEDNS= true
             break
         ;;
         [Nn]* )
