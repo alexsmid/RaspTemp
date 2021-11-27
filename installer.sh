@@ -8,9 +8,9 @@ fi
 APTGET="python3-pip"
 PIP="flask waitress bootstrap-flask"
 
-Echo "Installing needed applications: $APTGET"
+echo "Installing needed applications: $APTGET"
 sudo apt-get install $APTGET
-Echo "Installing needed pip packages: $PIP"
+echo "Installing needed pip packages: $PIP"
 sudo pip install $PIP
 
 while true; do
