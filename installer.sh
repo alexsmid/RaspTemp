@@ -8,16 +8,16 @@ fi
 APTGET="python3-pip"
 PIP="flask waitress bootstrap-flask"
 
-Echo "Installing needed applications: "$APTGET
+Echo "Installing needed applications: $APTGET"
 sudo apt-get install $APTGET
-Echo "Installing needed pip packages: "$PIP
+Echo "Installing needed pip packages: $PIP"
 sudo pip install $PIP
 
 while true; do
     read -p "Do you wish to setup the RaspTemp service?: " yn
     case $yn in
         [Yy]* ) 
-            sudo ln -s $HOME"/RaspTemp/RaspTemp.service" RaspTemp.service
+            sudo ln -s "$HOME/RaspTemp/RaspTemp.service" RaspTemp.service
             break
         ;;
         [Nn]* )
@@ -55,7 +55,7 @@ then
                 break
             ;;
             * ) 
-                sed -i -e "s/%DOMAINNAMETOBEREPLACED%/$answer/g" $HOME"/RaspTemp/freedns.py"
+                sed -i -e "s/%DOMAINNAMETOBEREPLACED%/$answer/g" "$HOME/RaspTemp/freedns.py"
                 break
             ;;
         esac
@@ -68,7 +68,7 @@ then
                 break
             ;;
             * ) 
-                sed -i -e "s/%KEYTOBEREPLACED%/$answer/g" $HOME"/RaspTemp/freedns.py"
+                sed -i -e "s/%KEYTOBEREPLACED%/$answer/g" "$HOME/RaspTemp/freedns.py"
                 break
             ;;
         esac
