@@ -14,7 +14,7 @@ echo "Installing needed pip packages: $PIP"
 sudo pip install $PIP
 
 while true; do
-    read -p "Do you wish to setup the RaspTemp service?: " yn
+    read -p "Do you wish to setup the RaspTemp service?: [y/n]" yn
     case $yn in
         [Yy]* ) 
             sudo ln -s "$HOME/RaspTemp/RaspTemp.service" RaspTemp.service
@@ -30,10 +30,10 @@ while true; do
 done
 
 while true; do
-    read -p "Do you wish to setup the FreeDNS?: " yn
+    read -p "Do you wish to setup the FreeDNS?: [y/n]" yn
     case $yn in
         [Yy]* ) 
-            INSTALLFREEDNS= true
+            INSTALLFREEDNS = 1
             break
         ;;
         [Nn]* )
@@ -45,13 +45,13 @@ while true; do
     esac
 done
 
-if [$INSTALLFREEDNS]
+if [$INSTALLFREEDNS -eq 1]
 then
     while true; do
-        read -p "FreeDNS domain name (enter to skip): " answer
+        read -p "FreeDNS domain name (enter to skip): [y/n]" answer
         case $answer in
             "" ) 
-                echo "Skipped, please change 'freedns.py' manually"
+                echo "Skipped, please change ""freedns.py"" manually"
                 break
             ;;
             * ) 
@@ -61,7 +61,7 @@ then
         esac
     done
     while true; do
-        read -p "FreeDNS key (enter to skip): " answer
+        read -p "FreeDNS key (enter to skip): [y/n]" answer
         case $answer in
             "" ) 
                 echo "Skipped, please change 'freedns.py' manually"
@@ -74,7 +74,7 @@ then
         esac
     done
     while true; do
-        read -p "Do you wish to setup the Crontab for FreeDNS?: " yn
+        read -p "Do you wish to setup the Crontab for FreeDNS?: [y/n]" yn
         case $yn in
             [Yy]* ) 
                 sudo crontab -l > crontabtemp
