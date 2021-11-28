@@ -38,8 +38,10 @@ mkdir RaspTemp
 - Clone the git repository
 - Run the install.sh script
 
-This will install the needed packages, set up the service, setup FreeDNS script and crontab for FreeDNS
-
+This will install the needed packages, set up the service, setup the FreeDNS script and crontab for the FreeDNS script
+The service will be called RaspTemp, controllable from systemctl. It will run from RaspTemp.service (throug a link from /etc/systemd/system/)  
+The FreeDNS script will be run by crontab (sudo) every hour, and log to /var/log/freedns  
+ 
 # TODO
 - [x] Systemd file
 - [x] flask-boostrap

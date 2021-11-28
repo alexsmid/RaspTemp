@@ -3,7 +3,7 @@ Description=Flask webserver for Temperature measurement with DS18B20
 After=multi-user.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/tempmeasureuser/RaspTemp/main.py
+ExecStart=/usr/bin/python3 %MAINFILELOCATION%
 
 [Install]
 WantedBy=multi-user.target

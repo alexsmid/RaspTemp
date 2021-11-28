@@ -19,6 +19,7 @@ while true; do
     read -p "Do you wish to setup the RaspTemp service? [y/n]: " yn
     case $yn in
         [Yy]* ) 
+            sed -i -e "s^%MAINFILELOCATION%^$USERHOME/RaspTemp/main.py^g" "$USERHOME/RaspTemp/RaspTemp.service"
             sudo ln -s "$USERHOME/RaspTemp/RaspTemp.service" "/etc/systemd/system/RaspTemp.service"
             break
         ;;
@@ -50,7 +51,7 @@ done
 if $INSTALLFREEDNS
 then
     while true; do
-        read -p "FreeDNS domain name (enter to skip)? [y/n]: " answer
+        read -p "FreeDNS domain name (enter to skip)?: " answer
         case $answer in
             "" ) 
                 echo "Skipped, please change ""freedns.py"" manually"
@@ -63,7 +64,7 @@ then
         esac
     done
     while true; do
-        read -p "FreeDNS key (enter to skip)? [y/n]: " answer
+        read -p "FreeDNS key (enter to skip)?: " answer
         case $answer in
             "" ) 
                 echo "Skipped, please change 'freedns.py' manually"
