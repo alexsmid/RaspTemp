@@ -19,7 +19,7 @@ while true; do
     read -p "Do you wish to setup the RaspTemp service? [y/n]: " yn
     case $yn in
         [Yy]* ) 
-            sudo ln -s "$USERHOME/RaspTemp/RaspTemp.service" RaspTemp.service
+            sudo ln -s "$USERHOME/RaspTemp/RaspTemp.service" "/etc/systemd/system/RaspTemp.service"
             break
         ;;
         [Nn]* )
