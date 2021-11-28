@@ -1,12 +1,5 @@
 #!/bin/bash
 
-USERHOME=$HOME
-
-#if [ "$EUID" -ne 0 ]
-#  then echo "Please run as root"
-#  exit
-#fi
-
 APTGET="python3-pip"
 PIP="flask waitress bootstrap-flask"
 
@@ -19,8 +12,9 @@ while true; do
     read -p "Do you wish to setup the RaspTemp service? [y/n]: " yn
     case $yn in
         [Yy]* ) 
-            sed -i -e "s^%MAINFILELOCATION%^$USERHOME/RaspTemp/main.py^g" "$USERHOME/RaspTemp/RaspTemp.service"
-            sudo ln -s "$USERHOME/RaspTemp/RaspTemp.service" "/etc/systemd/system/RaspTemp.service"
+            sed -i -e "s^%MAINFILELOCATION%^$HOME/RaspTemp/main.py^g" "$HOME/RaspTemp/RaspTemp.service"
+            sudo ln -s "$HOME/RaspTemp/RaspTemp.service" "/etc/systemd/system/RaspTemp.service"
+            sudo systemctl enable RaspTemp
             break
         ;;
         [Nn]* )
@@ -58,7 +52,7 @@ then
                 break
             ;;
             * ) 
-                sed -i -e "s/%DOMAINNAMETOBEREPLACED%/$answer/g" "$USERHOME/RaspTemp/freedns.py"
+                sed -i -e "s/%DOMAINNAMETOBEREPLACED%/$answer/g" "$HOME/RaspTemp/freedns.py"
                 break
             ;;
         esac
@@ -71,7 +65,7 @@ then
                 break
             ;;
             * ) 
-                sed -i -e "s/%KEYTOBEREPLACED%/$answer/g" "$USERHOME/RaspTemp/freedns.py"
+                sed -i -e "s/%KEYTOBEREPLACED%/$answer/g" "$HOME/RaspTemp/freedns.py"
                 break
             ;;
         esac
@@ -80,11 +74,11 @@ then
         read -p "Do you wish to setup the Crontab for FreeDNS? [y/n]: " yn
         case $yn in
             [Yy]* ) 
-                sudo crontab -l > crontabtemp
-                echo "0 * * * * python $USERHOME/RaspTemp/freedns.py" >> crontabtemp
-                sudo crontab crontabtemp
+                crontab -l > crontabtemp
+                echo "0 * * * * python $HOME/RaspTemp/freedns.py" >> crontabtemp
+                crontab crontabtemp
                 rm crontabtemp
-                echo "Crontab configured, running ""$USERHOME/RaspTemp/freedns.py"" every hour"
+                echo "Crontab configured, running ""$HOME/RaspTemp/freedns.py"" every hour"
                 break
             ;;
             [Nn]* )
