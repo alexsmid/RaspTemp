@@ -34,6 +34,7 @@ while true; do
             break
         ;;
         [Nn]* )
+            INSTALLFREEDNS=false
             break
         ;;
         * ) 
