@@ -42,6 +42,22 @@ This will install the needed packages, set up the service, setup the FreeDNS scr
 The service will be called RaspTemp, controllable from systemctl. It will run from RaspTemp.service (throug a link from /etc/systemd/system/)  
 The FreeDNS script will be run by crontab (sudo) every hour, and log to /var/log/freedns  
  
+ ### Set up the sensor
+- Open /boot/config.txt with your favorite text editor
+- Add the following line to the bottom of the file
+```
+dtoverlay=w1-gpio,gpiopin=4
+```
+You should also load in the device kernel modules by running the following
+sudo modprobe w1-gpio
+sudo modprobe w1-therm
+
+sudo nano /etc/modules?
+and last add the following two lines:
+```
+w1-gpio
+w1-therm
+```
 # TODO
 - [x] Systemd file
 - [x] flask-boostrap
