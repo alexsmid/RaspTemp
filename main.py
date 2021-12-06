@@ -44,4 +44,4 @@ if __name__ == "__main__":
     from waitress import serve
     from livereload import Server
     server = Server(app.wsgi_app)
-    server.serve(app,host='0.0.0.0', port=80)
+    server.serve(host='0.0.0.0', port=80)
