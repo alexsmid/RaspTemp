@@ -39,25 +39,38 @@ mkdir RaspTemp
 - Run the install.sh script
 
 This will install the needed packages, set up the service, setup the FreeDNS script and crontab for the FreeDNS script
-The service will be called RaspTemp, controllable from systemctl. It will run from RaspTemp.service (throug a link from /etc/systemd/system/)  
-The FreeDNS script will be run by crontab (sudo) every hour, and log to /var/log/freedns  
+The service will be called RaspTemp, controllable from systemctl. It will run RaspTemp.service (through a symlink to /etc/systemd/system/)  
+The FreeDNS script will be run by crontab (sudo) every hour, and log to $HOME/RaspTemp/freedns.log
  
  ### Set up the sensor
+- Connect the DS18B20 to the Raspberry:  
+Red cable to pin 1 (3,3v), black to pin 6 (ground), yellow/data to pin 7 (GPIO 4)  
+Make sure there is a 4,7kΩ resistor between data and red  
 - Open /boot/config.txt with your favorite text editor
-- Add the following line to the bottom of the file
+- Add the following line to the bottom of the file (gpiopin=4 is pin 7)
 ```
 dtoverlay=w1-gpio,gpiopin=4
 ```
-You should also load in the device kernel modules by running the following
+- You should also load in the device kernel modules by running the following
+```
 sudo modprobe w1-gpio
 sudo modprobe w1-therm
+```
+- Restart the machine and check that the modules are loaded:  
+```
+lsmod | grep w1
+```
+It should list the w1 modules loaded  
+If not, do the following:
+```
+sudo nano /etc/modules
+```
+- Add the following lines to the bottom of the file
+```
+w1_gpio
+w1_therm
+```
 
-sudo nano /etc/modules?
-and last add the following two lines:
-```
-w1-gpio
-w1-therm
-```
 # TODO
 - [x] Systemd file
 - [x] flask-boostrap
@@ -65,6 +78,8 @@ w1-therm
 - [x] Get gage working on mobile
 - [ ] Remote internet access with private keys
 - [x] DynDNS
+- [x] FreeDNS script
+- [x] FreeDNS crontab
 - [ ] Get temperature
 - [ ] Get last updated date
-- [x] Python install script
+- [x] Bash install script

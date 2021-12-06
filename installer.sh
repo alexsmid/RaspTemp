@@ -9,6 +9,20 @@ echo "Installing needed pip packages: $PIP"
 sudo pip install $PIP
 
 while true; do
+    read -p "Do you wish to change the title of the web page? (default title: Temperature) [enter to skip]: " answer
+    case $answer in
+        "" ) 
+            echo "Skipped, please change ""templates/main.html"" manually"
+            break
+        ;;
+        * ) 
+            sed -i -e "s/<title>Temperature</title>/<title>$answer</title>/g" "$HOME/RaspTemp/templates/main.html"
+            break
+        ;;
+    esac
+done
+
+while true; do
     read -p "Do you wish to setup the RaspTemp service? [y/n]: " yn
     case $yn in
         [Yy]* ) 
@@ -21,7 +35,7 @@ while true; do
             break
         ;;
         * ) 
-            echo "Please answer yes or no."
+            echo "Please answer ""Y/y"" or ""N/n""."
         ;;
     esac
 done
@@ -38,7 +52,7 @@ while true; do
             break
         ;;
         * ) 
-            echo "Please answer yes or no."
+            echo "Please answer ""Y/y"" or ""N/n""."
         ;;
     esac
 done
@@ -46,7 +60,7 @@ done
 if $INSTALLFREEDNS
 then
     while true; do
-        read -p "FreeDNS domain name (enter to skip)?: " answer
+        read -p "FreeDNS domain name? [enter to skip]: " answer
         case $answer in
             "" ) 
                 echo "Skipped, please change ""freedns.py"" manually"
@@ -59,7 +73,7 @@ then
         esac
     done
     while true; do
-        read -p "FreeDNS key (enter to skip)?: " answer
+        read -p "FreeDNS key? [enter to skip]: " answer
         case $answer in
             "" ) 
                 echo "Skipped, please change 'freedns.py' manually"
@@ -86,7 +100,7 @@ then
                 break
             ;;
             * ) 
-                echo "Please answer yes or no."
+                echo "Please answer ""Y/y"" or ""N/n""."
             ;;
         esac
     done
