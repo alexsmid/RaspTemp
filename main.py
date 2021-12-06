@@ -1,10 +1,10 @@
 #!/usr/bin/python
+from datetime import datetime
 from flask_bootstrap import Bootstrap
 from flask import Flask, render_template
-import os
 import json
+import os
 import time
-
 
 app = Flask(__name__)
 

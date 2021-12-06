@@ -1,9 +1,9 @@
 #!/usr/bin/python
-from glob import glob
-import time
 from datetime import datetime
-import os
+from glob import glob
 import json
+import os
+import time
 
 HOME = os.environ.get('HOME')
 TEMPERATURE_FILE = os.path.join(HOME,"RaspTemp/temperature.log")
