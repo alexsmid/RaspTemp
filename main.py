@@ -10,15 +10,13 @@ app = Flask(__name__)
 
 bootstrap = Bootstrap(app)
 
-USER = os.environ.get('SUDO_USER')
-TEMPERATURE_FILE = os.path.join("/home/", USER ,"RaspTemp/temperature.log")
-
-with open(TEMPERATURE_FILE) as json_file:
-        json_list = json.load(json_file)
-        json_sorted = sorted(json_list['temperatures'], key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d %H:%M:%S'), reverse=True)
+TEMPERATURE_FILE = "%TEMPERATUREFILELOCATION%"
 
 @app.route("/")
 def main():
+    with open(TEMPERATURE_FILE) as json_file:
+        json_list = json.load(json_file)
+        json_sorted = sorted(json_list['temperatures'], key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d %H:%M:%S'), reverse=True)
     while True:
         templateData = {
             'temperature' : json_sorted[0]['temperature'],

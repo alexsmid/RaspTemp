@@ -1,7 +1,7 @@
 #!/bin/bash
 
 APTGET="python3-pip"
-PIP="flask waitress bootstrap-flask"
+PIP="flask waitress bootstrap-flask livereload"
 
 echo "Installing needed applications: $APTGET"
 sudo apt-get install $APTGET
@@ -16,7 +16,8 @@ while true; do
             break
         ;;
         * ) 
-            sed -i -e "s/<title>Temperature</title>/<title>$answer</title>/g" "$HOME/RaspTemp/templates/main.html"
+            sed -i -e "s^<title>Temperature</title>^<title>$answer</title>^g" "$HOME/RaspTemp/templates/main.html"
+            sed -i -e "s^%TEMPERATUREFILELOCATION%^$HOME/RaspTemp/temperature.log^g" "$HOME/RaspTemp/main.py"
             break
         ;;
     esac
