@@ -42,6 +42,26 @@ while true; do
 done
 
 while true; do
+        read -p "Do you wish to setup the Crontab for reading the temperature? [y/n]: " yn
+        case $yn in
+            [Yy]* ) 
+                crontab -l > crontabtemp
+                echo "*/10 * * * * python $HOME/RaspTemp/readtemp.py" >> crontabtemp
+                crontab crontabtemp
+                rm crontabtemp
+                echo "Crontab configured, running ""$HOME/RaspTemp/readtemp.py"" every 5 minutes, with output to temperature.log"
+                break
+            ;;
+            [Nn]* )
+                break
+            ;;
+            * ) 
+                echo "Please answer ""Y/y"" or ""N/n""."
+            ;;
+        esac
+    done
+
+while true; do
     read -p "Do you wish to setup the FreeDNS? [y/n]: " yn
     case $yn in
         [Yy]* ) 

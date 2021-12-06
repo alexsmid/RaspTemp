@@ -40,7 +40,8 @@ mkdir RaspTemp
 
 This will install the needed packages, set up the service, setup the FreeDNS script and crontab for the FreeDNS script
 The service will be called RaspTemp, controllable from systemctl. It will run RaspTemp.service (through a symlink to /etc/systemd/system/)  
-The FreeDNS script will be run by crontab (sudo) every hour, and log to $HOME/RaspTemp/freedns.log
+The ReadTemp script will be run by crontab every 10 minutes, and log to $HOME/RaspTemp/temperature.log
+The FreeDNS script will be run by crontab every hour, and log to $HOME/RaspTemp/freedns.log
  
  ### Set up the sensor
 - Connect the DS18B20 to the Raspberry:  
@@ -56,12 +57,11 @@ dtoverlay=w1-gpio,gpiopin=4
 sudo modprobe w1-gpio
 sudo modprobe w1-therm
 ```
-- Restart the machine and check that the modules are loaded:  
+- Check that the modules are loaded:
 ```
 lsmod | grep w1
 ```
-It should list the w1 modules loaded  
-If not, do the following:
+- To load the modules every start:
 ```
 sudo nano /etc/modules
 ```
@@ -81,7 +81,7 @@ w1_therm
 - [x] FreeDNS script
 - [x] FreeDNS crontab
 - [x] Script for getting temperature and date
-- [ ] Schedule script for getting the temperature
-- [ ] Get temperature
-- [ ] Get last updated date
+- [x] Schedule script for getting the temperature
+- [x] Get temperature
+- [x] Get last updated date
 - [x] Bash install script
