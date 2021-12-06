@@ -45,5 +45,5 @@ if __name__ == "__main__":
     #serve(app,host='0.0.0.0', port=80)
     from livereload import Server
     server = Server(app.wsgi_app)
-    server.watch(delay=5)
+    server.watch(device_file,delay=5)
     server.serve(host='0.0.0.0', port=80)
