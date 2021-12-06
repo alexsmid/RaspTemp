@@ -80,6 +80,8 @@ w1_therm
 - [x] DynDNS
 - [x] FreeDNS script
 - [x] FreeDNS crontab
+- [x] Script for getting temperature and date
+- [ ] Schedule script for getting the temperature
 - [ ] Get temperature
 - [ ] Get last updated date
 - [x] Bash install script

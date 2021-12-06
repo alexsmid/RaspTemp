@@ -10,8 +10,8 @@ app = Flask(__name__)
 
 bootstrap = Bootstrap(app)
 
-HOME = os.environ.get('HOME')
-TEMPERATURE_FILE = os.path.join(HOME,"RaspTemp/temperature.log")
+USER = os.environ.get('SUDO_USER')
+TEMPERATURE_FILE = os.path.join("/home/", USER ,"RaspTemp/temperature.log")
 
 with open(TEMPERATURE_FILE) as json_file:
         json_list = json.load(json_file)
