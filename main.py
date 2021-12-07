@@ -20,9 +20,9 @@ def main():
     while True:
         templateData = {
             'temperature' : json_sorted[0]['temperature'],
-            'updated' : json_sorted[0]['date']
+            'updated' : json_sorted[0]['date'],
+            'history' : json_sorted[1:]
         }
-        time.sleep(10)
         return render_template('main.html', **templateData)
 
 if __name__ == "__main__":
