@@ -12,14 +12,17 @@
             margin: 50px auto 0 auto;
             text-align: center;
         }
+
         .gauge {
             height: 300px;
             width: 300px;
         }
+
         #history {
             margin-left: auto;
             margin-right: auto;
         }
+
         #history tr:nth-child(even) {
             background-color: lightgrey;
         }
@@ -44,22 +47,20 @@
         <font color="gray">Last updated:<br>
             {{updated}}</font>
         <table id="history">
-            <table >
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Temperature</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in history%}
-                    <tr>
-                        <td>{{ row['date'] }}</td>
-                        <td>{{ row['temperature'] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Temperature</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in history%}
+                <tr>
+                    <td>{{ row['date'] }}</td>
+                    <td>{{ row['temperature'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
     {% block content %}{% endblock %}
@@ -72,38 +73,38 @@
             var g1 = new JustGage({
                 id: "g1",
                 value: {{ temperature }},
-                min: 0,
-                max: 40,
-                height: 300,
-                width: 300,
-                decimals: 1,
-                symbol: '°C',
-                gaugeWidthScale: 0.8,
-                customSectors: {
-                    ranges: [
-                        {
-                            color: "#ff3b30",
-                            lo: 0,
-                            hi: 10
-                        }, {
-                            color: "#f39f00",
-                            lo: 11,
-                            hi: 15
-                        }, {
-                            color: "#43bf58",
-                            lo: 16,
-                            hi: 25
-                        }, {
-                            color: "#f39f00",
-                            lo: 26,
-                            hi: 30
-                        }, {
-                            color: "#ff3b30",
-                            lo: 31,
-                            hi: 40
-                        }
-                    ]
+            min: 0,
+            max: 40,
+            height: 300,
+            width: 300,
+            decimals: 1,
+            symbol: '°C',
+            gaugeWidthScale: 0.8,
+            customSectors: {
+            ranges: [
+                {
+                    color: "#ff3b30",
+                    lo: 0,
+                    hi: 10
+                }, {
+                    color: "#f39f00",
+                    lo: 11,
+                    hi: 15
+                }, {
+                    color: "#43bf58",
+                    lo: 16,
+                    hi: 25
+                }, {
+                    color: "#f39f00",
+                    lo: 26,
+                    hi: 30
+                }, {
+                    color: "#ff3b30",
+                    lo: 31,
+                    hi: 40
                 }
+            ]
+        }
             });
         });
     </script>

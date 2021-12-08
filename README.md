@@ -36,8 +36,10 @@ groups | sed 's/pi //g' | sed 's/ /,/g' | xargs -I{} sudo usermod -a -G {} raspt
 mkdir RaspTemp
 ```
 - Clone the git repository
-- Run the install.sh script
-
+- Run the installer.sh script
+```
+. installer.sh
+```
 This will install the needed packages, set up the service, setup the FreeDNS script and crontab for the FreeDNS script
 The service will be called RaspTemp, controllable from systemctl. It will run RaspTemp.service (through a symlink to /etc/systemd/system/)  
 The ReadTemp script will be run by crontab every 10 minutes, and log to $HOME/RaspTemp/temperature.log

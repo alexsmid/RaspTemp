@@ -49,7 +49,7 @@ while true; do
                 echo "*/10 * * * * python $HOME/RaspTemp/readtemp.py" >> crontabtemp
                 crontab crontabtemp
                 rm crontabtemp
-                echo "Crontab configured, running ""$HOME/RaspTemp/readtemp.py"" every 5 minutes, with output to temperature.log"
+                echo "Crontab configured, running ""$HOME/RaspTemp/readtemp.py"" every 10 minutes, with output to temperature.log"
                 break
             ;;
             [Nn]* )
