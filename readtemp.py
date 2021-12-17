@@ -40,6 +40,12 @@ def create_temp_json_object(currenttemperature):
         'temperature': currenttemperature
     })
 
+def create_temp_json_object(currenttemperature):
+    return ({
+        'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        'temperature': currenttemperature
+    })
+
 currenttemperature = read_temp()
 
 if not os.path.exists(TEMPERATURE_FILE):
@@ -56,7 +62,6 @@ else:
         json_new_list['temperatures'] = []
         json_new_list['history'] = []
         history_list_grouped_date_list = {} 
-        history_list_grouped_date_complete_list = {} 
         temp_history_date_set = set()
         if len(json_sorted) > 0:
             for line in json_sorted:
@@ -67,21 +72,20 @@ else:
                     json_new_list['temperatures'].reverse()
                     if json_sorted[0]['temperature'] != currenttemperature:
                         json_new_list['temperatures'].append(create_temp_json_object(currenttemperature))
-        
         for temp_history in temp_history_list:
             temp_history_date_set.add(datetime.strptime(temp_history['date'], '%Y-%m-%d %H:%M:%S').date())
         for temp_history_date in temp_history_date_set:
             temp_history_date_date = temp_history_date.strftime('%Y-%m-%d')
             history_list_grouped_date_list[temp_history_date_date] = []
-            for historylist in temp_history_list:
-                if (datetime.strptime(historylist['date'], '%Y-%m-%d %H:%M:%S').date().strftime('%Y-%m-%d') == temp_history_date_date):
-                    history_list_grouped_date_list[temp_history_date_date].append(historylist)
+            for history_list in temp_history_list:
+                if (datetime.strptime(history_list['date'], '%Y-%m-%d %H:%M:%S').date().strftime('%Y-%m-%d') == temp_history_date_date):
+                    history_list_grouped_date_list[temp_history_date_date].append(history_list)
         for history_list_grouped_date in history_list_grouped_date_list:
             json_new_list['history'].append({
-                'Date': history_list_grouped_date,
-                'Min' : min(temp['temperature'] for temp in history_list_grouped_date_list[history_list_grouped_date]),
-                'Max' : max(temp['temperature'] for temp in history_list_grouped_date_list[history_list_grouped_date]),
-                'Mean' : round(sum(temp['temperature'] for temp in history_list_grouped_date_list[history_list_grouped_date]) / len(history_list_grouped_date_list[history_list_grouped_date]),1)
+                'date': history_list_grouped_date,
+                'min' : min(temp['temperature'] for temp in history_list_grouped_date_list[history_list_grouped_date]),
+                'max' : max(temp['temperature'] for temp in history_list_grouped_date_list[history_list_grouped_date]),
+                'mean' : round(sum(temp['temperature'] for temp in history_list_grouped_date_list[history_list_grouped_date]) / len(history_list_grouped_date_list[history_list_grouped_date]),1)
             })
         write_temp_to_file(json_new_list)
             
