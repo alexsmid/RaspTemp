@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from datetime import datetime
+from datetime import datetime,timedelta
 from glob import glob
 import json
 import os
@@ -7,7 +7,7 @@ import time
 
 HOME = os.environ.get('HOME')
 TEMPERATURE_FILE = os.path.join(HOME,"RaspTemp/temperature.log")
-max_saved_temps = 1000
+number_of_days_displayed = 3
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
@@ -50,10 +50,37 @@ else:
     with open(TEMPERATURE_FILE) as json_file:
         json_list = json.load(json_file)
         json_sorted = sorted(json_list['temperatures'], key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d %H:%M:%S'), reverse=True)
-        if json_sorted[0]['temperature'] != currenttemperature:
-            json_list = {}
-            json_list['temperatures'] = json_sorted[0:(max_saved_temps-1)]
-            json_list['temperatures'].reverse()
-            json_list['temperatures'].append(create_temp_json_object(currenttemperature))
-            write_temp_to_file(json_list)
+        temp_history_list = []
+        json_new_list = {}
+        json_new_list['temperatures'] = []
+        json_new_list['history'] = []
+        history_list_grouped_date_list = {} 
+        history_list_grouped_date_complete_list = {} 
+        temp_history_date_set = set()
+        if len(json_sorted) > 0:
+            for line in json_sorted:
+                if (datetoday - timedelta(days=number_of_days_displayed)).date() > datetime.strptime(line['date'], '%Y-%m-%d %H:%M:%S').date():
+                    temp_history_list.append({'date': line['date'],'temperature': line['temperature']})
+                else:
+                    json_new_list['temperatures'].append(line)
+                    json_new_list['temperatures'].reverse()
+                    if json_sorted[0]['temperature'] != currenttemperature:
+                        json_new_list['temperatures'].append(create_temp_json_object(currenttemperature))
         
+        for temp_history in temp_history_list:
+            temp_history_date_set.add(datetime.strptime(temp_history['date'], '%Y-%m-%d %H:%M:%S').date())
+        for temp_history_date in temp_history_date_set:
+            temp_history_date_date = temp_history_date.strftime('%Y-%m-%d')
+            history_list_grouped_date_list[temp_history_date_date] = []
+            for historylist in temp_history_list:
+                if (datetime.strptime(historylist['date'], '%Y-%m-%d %H:%M:%S').date().strftime('%Y-%m-%d') == temp_history_date_date):
+                    history_list_grouped_date_list[temp_history_date_date].append(historylist)
+        for history_list_grouped_date in history_list_grouped_date_list:
+            json_new_list['history'].append({
+                'Date': history_list_grouped_date,
+                'Min' : min(temp['temperature'] for temp in history_list_grouped_date_list[history_list_grouped_date]),
+                'Max' : max(temp['temperature'] for temp in history_list_grouped_date_list[history_list_grouped_date]),
+                'Mean' : round(sum(temp['temperature'] for temp in history_list_grouped_date_list[history_list_grouped_date]) / len(history_list_grouped_date_list[history_list_grouped_date]),1)
+            })
+        write_temp_to_file(json_new_list)
+            

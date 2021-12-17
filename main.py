@@ -16,12 +16,14 @@ TEMPERATURE_FILE = "%TEMPERATUREFILELOCATION%"
 def main():
     with open(TEMPERATURE_FILE) as json_file:
         json_list = json.load(json_file)
-        json_sorted = sorted(json_list['temperatures'], key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d %H:%M:%S'), reverse=True)
+        json_temperatures_sorted = sorted(json_list['temperatures'], key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d %H:%M:%S'), reverse=True)
+        json_temperatures_history_sorted = sorted(json_list['history'], key=lambda x: datetime.strptime(x['Date'], '%Y-%m-%d'), reverse=True)
     while True:
         templateData = {
-            'temperature' : json_sorted[0]['temperature'],
-            'updated' : json_sorted[0]['date'],
-            'history' : json_sorted[1:]
+            'temperature' : json_temperatures_sorted[0]['temperature'],
+            'updated' : json_temperatures_sorted[0]['date'],
+            'history' : json_temperatures_sorted[1:],
+            'old_history' : json_temperatures_history_sorted
         }
         return render_template('main.html', **templateData)
 
