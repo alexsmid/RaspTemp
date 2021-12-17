@@ -7,7 +7,7 @@ import time
 
 HOME = os.environ.get('HOME')
 TEMPERATURE_FILE = os.path.join(HOME,"RaspTemp/temperature.log")
-number_of_days_displayed = 3
+number_of_days_displayed = 2
 datetoday = datetime.today()
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob(base_dir + '28*')[0]
