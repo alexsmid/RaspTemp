@@ -60,7 +60,9 @@ else:
         temp_history_list = []
         json_new_list = {}
         json_new_list['temperatures'] = []
-        json_new_list['history'] = json_list['history']
+        json_new_list['history'] = []
+        if (json_list['history']):
+            json_new_list['history'] = json_list['history']
         history_list_grouped_date_list = {} 
         temp_history_date_set = set()
         if len(json_sorted) > 0:
