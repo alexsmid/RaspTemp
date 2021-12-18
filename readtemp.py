@@ -68,14 +68,14 @@ else:
         history_list_grouped_date_list = {} 
         temp_history_date_set = set()
         if len(json_sorted) > 0:
+            if json_sorted[0]['temperature'] != currenttemperature:
+                json_new_list['temperatures'].append(create_temp_json_object(currenttemperature))
             for line in json_sorted:
                 if (datetoday - timedelta(days=number_of_days_displayed)).date() > datetime.strptime(line['date'], '%Y-%m-%d %H:%M:%S').date():
                     temp_history_list.append({'date': line['date'],'temperature': line['temperature']})
                 else:
                     json_new_list['temperatures'].append(line)
                     json_new_list['temperatures'].reverse()
-                    if json_sorted[0]['temperature'] != currenttemperature:
-                        json_new_list['temperatures'].append(create_temp_json_object(currenttemperature))
         for temp_history in temp_history_list:
             temp_history_date_set.add(datetime.strptime(temp_history['date'], '%Y-%m-%d %H:%M:%S').date())
         for temp_history_date in temp_history_date_set:
