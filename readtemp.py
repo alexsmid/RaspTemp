@@ -52,6 +52,7 @@ if not os.path.exists(TEMPERATURE_FILE):
     json_list = {}
     json_list['temperatures'] = []
     json_list['temperatures'].append(create_temp_json_object(currenttemperature))
+    json_list['history'] = []
     write_temp_to_file(json_list)
 else:
     with open(TEMPERATURE_FILE) as json_file:

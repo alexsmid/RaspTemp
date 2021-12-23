@@ -35,6 +35,10 @@
         #old_history tr:nth-child(even) {
             background-color: lightgrey;
         }
+        
+        #old_history td {
+            padding: 0px 10px;
+        }
 
     </style>
     {% block head %}
@@ -72,6 +76,8 @@
                 {% endfor %}
             </tbody>
         </table>
+        <br>
+        <h5>History</h5>
         <table id="old_history">
             <thead>
                 <tr>
