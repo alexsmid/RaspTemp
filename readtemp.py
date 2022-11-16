@@ -40,12 +40,6 @@ def create_temp_json_object(currenttemperature):
         'temperature': currenttemperature
     })
 
-def create_temp_json_object(currenttemperature):
-    return ({
-        'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        'temperature': currenttemperature
-    })
-
 currenttemperature = read_temp()
 
 if not os.path.exists(TEMPERATURE_FILE):
@@ -77,6 +71,8 @@ else:
                 else:
                     json_new_list['temperatures'].append(line)
                     json_new_list['temperatures'].reverse()
+        else:
+            json_new_list['temperatures'].append(create_temp_json_object(currenttemperature))
         for temp_history in temp_history_list:
             temp_history_date_set.add(datetime.strptime(temp_history['date'], '%Y-%m-%d %H:%M:%S').date())
         for temp_history_date in temp_history_date_set:
