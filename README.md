@@ -72,6 +72,10 @@ sudo nano /etc/modules
 w1_gpio
 w1_therm
 ```
+- There seems to be a bug with livereload and tornado version 6.3.3. Currently only version 6.2.0 works. To install version 6.2.0 instead, run
+```
+sudo pip install --force-reinstall -v "tornado ==6.2.0"
+```
 
 # TODO
 - [x] Systemd file

@@ -14,7 +14,7 @@ FREEDNS_URL = "http://freedns.afraid.org/dynamic/update.php?"
 DOMAIN = "%DOMAINNAMETOBEREPLACED%"
 USER_KEY = "%KEYTOBEREPLACED%"
 
-extip = (urllib.request.urlopen("http://ip.dnsexit.com/").read()).decode().strip()
+extip = (urllib.request.urlopen("https://api.ipify.org").read()).decode().strip()
 
 def writeiptofile(ip):
     f = open(OLDIP_FILE, 'w')
